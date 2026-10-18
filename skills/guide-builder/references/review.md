@@ -24,6 +24,6 @@ Open the built page and walk it top to bottom as someone who only has what the p
 - **Can the reader tell it worked?** *You should see* describes what is on the screen, not «it works».
 - **Is anything only in your head?** Terms, folder names or choices you made while running the steps that the guide never says.
 
-Then check it once at 1400 px, at 1400 px in dark mode and at 400 px wide: nothing scrolls sideways, and copy buttons and the **Done** button are reachable.
+Then look at the built guide once at 1400 px, at 1400 px in dark mode and at 400 px wide: nothing scrolls sideways, and copy buttons and the **Done** button are reachable. Use any browser tool you have (this is checking your own file, not taking screenshots of the author's accounts). If you have none, ask the author to open `<name>.html` on their computer and on their phone and tell you what looks wrong.
 
 Write down what you changed in the «Final state» section of `PLAN.md`.

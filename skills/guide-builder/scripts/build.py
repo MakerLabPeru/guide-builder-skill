@@ -12,20 +12,20 @@ import argparse, base64, html, json, pathlib, re, sys
 
 LABELS = {
     "es": {
-        "theme": "Tema", "system": "Sistema", "light": "Claro", "dark": "Oscuro", "goto": "Ir a…",
+        "theme": "Tema", "system": "Sistema", "light": "Claro", "dark": "Oscuro",
         "progress": "Tu avance", "count": "{n} / {total}",
         "copy": "Copiar", "copied": "✓ Copiado",
         "next": "Listo, siguiente paso →", "finish": "Terminar ✓", "done": "✓ Hecho",
-        "next_hint": "¿Ya lo ves en tu pantalla?", "back": "← Anterior", "continue": "Continuar →", "complete": "🎉 ¡Terminaste la guía!", "reset": "Reiniciar avance",
+        "next_hint": "¿Ya lo ves en tu pantalla?", "back": "← Anterior", "continue": "Continuar →", "complete": "🎉 ¡Terminaste la guía!", "reset": "Reiniciar avance", "steps": "Pasos", "close": "Cerrar", "howto": "¿Cómo leer cada paso?",
         "quiz_check": "Comprobar", "quiz_right": "¡Exacto!", "quiz_wrong": "Casi. Puedes seguir igual.",
         "level": "Tu nivel", "level_note": "Solo cambian las explicaciones; los pasos son los mismos para todos.", "made": "Hecha con", "pending": "Captura pendiente",
     },
     "en": {
-        "theme": "Theme", "system": "System", "light": "Light", "dark": "Dark", "goto": "Go to…",
+        "theme": "Theme", "system": "System", "light": "Light", "dark": "Dark",
         "progress": "Your progress", "count": "{n} / {total}",
         "copy": "Copy", "copied": "✓ Copied",
         "next": "Done, next step →", "finish": "Finish ✓", "done": "✓ Done",
-        "next_hint": "Do you see it on your screen?", "back": "← Back", "continue": "Continue →", "complete": "🎉 You finished the guide!", "reset": "Reset progress",
+        "next_hint": "Do you see it on your screen?", "back": "← Back", "continue": "Continue →", "complete": "🎉 You finished the guide!", "reset": "Reset progress", "steps": "Steps", "close": "Close", "howto": "How to read each step",
         "quiz_check": "Check", "quiz_right": "Exactly!", "quiz_wrong": "Almost. You can keep going.",
         "level": "Your level", "level_note": "Only the explanations change; the steps are the same for everyone.", "made": "Made with", "pending": "Screenshot pending",
     },
@@ -152,7 +152,11 @@ if left:
 out.write_text(page)
 head = page[page.find("<head>") + 6: page.find("</head>")]
 head = re.sub(r"<meta[^>]*>\s*", "", head)
-body = page[page.find("<body>") + 6: page.rfind("</body>")]
+body_open = re.search(r"<body[^>]*>", page)
+body = page[body_open.end(): page.rfind("</body>")]
+body_attrs = body_open.group(0)[5:-1].strip()
+if body_attrs:
+    body = f"<script>document.body.setAttribute('data-mode', {json.dumps(re.search(r'data-mode=\"([^\"]*)\"', body_attrs).group(1))});</script>\n" + body
 artifact = out.with_suffix(".artifact.html")
 artifact.write_text(head.strip() + "\n" + body.strip() + "\n")
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 — 2026-10-17
+
+- Phone layout: a top bar with the guide name and progress opens a sheet with the steps, progress, reset and theme; **Done, next step** and **Back** stay fixed at the bottom; the legend folds into «How to read each step».
+- Tap a screenshot to see it full screen.
+- Fix: the Claude Artifact version showed stray `TYPE html>` text at the top.
+- Skill instructions, after a full test run by an agent: steps done in windows (editor, save dialog), a *Code* label for text pasted into a file, Windows / Mac variants, a step 0 template, where the check question goes, how to review the guide without a browser, and Vercel when Claude has no Artifact tool.
+
 ## 0.1.0 — 2026-10-17
 
 First version.

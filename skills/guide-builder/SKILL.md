@@ -3,7 +3,7 @@ name: guide-builder
 description: Prepare a step-by-step guide that supports a workshop — define the scope with the author, run every step for real, take the screenshots, and publish a self-paced page with copy buttons, progress and a "Done, next step" button. Also updates a guide after a session. Use when someone wants to create, prepare or update a workshop guide, tutorial or step-by-step walkthrough, for tech or non-tech topics.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   opencode/slash: "true"
 ---
 
@@ -14,11 +14,11 @@ You help an author (a teacher, a mentor, a volunteer) prepare a guide that peopl
 Two rules define every guide:
 
 1. **Done for real before it is written.** You run every digital step; every screenshot comes from that run. A step nobody ran does not go in the guide. Physical steps are done by the author, with their photos.
-2. **No paragraphs.** Every step has the same anatomy: *Where you are · Do this · Prompt or command · You should see · If it fails*, and every visible sentence fits in one sentence.
+2. **No paragraphs.** Every step has the same anatomy: *Where you are · Do this · Prompt, command or code · You should see · If it fails*, and every visible item (a paragraph, a list item, a caption) is a single sentence.
 
 ## Files
 
-Keep everything for a guide in `guides/<name>/` inside the folder where you were called:
+Keep everything for a guide in `guides/<name>/` at the root of the project where the session started:
 
 ```
 guides/<name>/
@@ -26,6 +26,7 @@ guides/<name>/
 ├── content.html       the guide body, built only from references/blocks.md
 ├── shots/             screenshots and photos
 ├── <name>.html        the built guide
+├── <name>.artifact.html  the same guide without <html>/<head>/<body>, for Claude Artifacts
 └── pending-shots.md   screenshots still missing (written by the build)
 ```
 
@@ -58,6 +59,8 @@ Then show the author **a short summary in the chat**: one line per step, plus th
 
 Run the steps in the guide's order, in the temporary folder. What turns out different from the plan **changes the guide**, not the other way around. Take the screenshots as you go, following `references/screenshots.md`. Captchas, passwords, 2FA codes, account sign-ups and physical actions are the author's: stop, say exactly which screen they have in front of them and what to click, and continue when they say it is done.
 
+Steps that happen in windows rather than in a terminal (an editor, a save dialog, a double click) still count: do them if you can operate that window; if you cannot, reproduce their result another way (for example, write the file the reader will save), check that result, keep their screenshots on the pending list, and mark in `PLAN.md` which menu and button names you could not see on screen, so the author confirms them.
+
 Done when the final result works end to end and every planned screenshot exists or is on the pending list.
 
 ## 4. Write `content.html`
@@ -66,8 +69,9 @@ Only with the blocks in `references/blocks.md`:
 
 - **Where you are**: the exact windows or places.
 - **Do this**: one `<li>` per action, title = verb + object, exact button names in bold, the screenshot below with a caption that says what to look at.
-- **Prompt or command**: the exact text in a `.cmd`; `[brackets]` are what the reader fills in. If the agent answers something the reader must read, show it in `.out`.
-- **You should see**: one `.see` per step, describing what is on the screen. It is informative; the template adds the **Done, next step** button.
+- **Prompt, command or code**: the exact text in a `.cmd`, labeled *Prompt* (pasted into an agent), *Command* (typed in a terminal) or *Code* (pasted into a file); `[brackets]` are what the reader fills in. If the agent answers something the reader must read, show it in `.out`.
+- **You should see**: one `.see` per step, describing what is on the screen. It is informative; the template adds the **Done, next step** button at the end of the step.
+- **Different operating systems**: when an action differs (Windows / Mac), give each one its own `<li>` with the system in its title; keep everything else shared.
 - **If it fails**: symptom → action, one line each, only failures you saw or the platform documents.
 - **Check questions**, **levels** and **challenges** only as decided in the scope.
 - In guides where the reader uses an AI agent, include the rescue prompt block at the top.
@@ -79,9 +83,9 @@ python3 <skill>/scripts/build.py guides/<name>/content.html guides/<name>/shots 
   --title "Name" --eyebrow "Community · Session" --lang es
 ```
 
-The guide shows one step at a time: **Done, next step** fades the next one in and lights it up in the menu; the cover only shows with the first step. Add `--scroll` for one long page instead, `--accent "#hex" --accent-dark "#hex"` for the author's color, and `--levels "A,B,C"` for a mixed audience. Exit code 1 means review errors; 2 means only pending screenshots.
+The guide shows one step at a time: **Done, next step** fades the next one in and lights it up in the menu; the cover only shows with the first step. On phones the sidebar becomes a top bar that opens a sheet with the steps, and **Done, next step** stays fixed at the bottom. Add `--scroll` for one long page instead, `--accent "#hex" --accent-dark "#hex"` for the author's color, and `--levels "A,B,C"` for a mixed audience. Exit code 1 means review errors; 2 means only pending screenshots.
 
-Review following `references/review.md` (the build check plus reading it as the reader), then publish following `references/publish.md`: a Claude Artifact when you are Claude, Vercel otherwise. Ask before publishing.
+Review following `references/review.md` (the build check plus reading it as the reader), then publish following `references/publish.md`: a Claude Artifact when you have the Artifact tool, Vercel otherwise. Ask before publishing.
 
 ## 6. Close
 

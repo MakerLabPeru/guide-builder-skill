@@ -8,7 +8,8 @@ Write every visible label in the guide's language. Fixed labels:
 |---|---|---|
 | where | Dónde estás | Where you are |
 | prompt | Prompt | Prompt |
-| command | Comando | Command |
+| command (typed in a terminal) | Comando | Command |
+| code (pasted into a file) | Código | Code |
 | agent output | Lo que te va a decir el agente | What your agent will say |
 | see | ✓ Debes ver | ✓ You should see |
 | fix | Si falla | If it fails |
@@ -35,7 +36,7 @@ Write every visible label in the guide's language. Fixed labels:
       <div><b>Si falla</b><span>Lo primero que revisas.</span></div>
     </div>
   </div>
-  <!-- only when the reader uses an AI agent -->
+  <!-- only when the reader uses an AI agent; guides without an agent have no rescue block -->
   <div class="rescue">
     <p class="ttl">Si te trabas, pega esto en tu agente:</p>
     <div class="cmd"><div class="k">Prompt</div><pre>Estoy siguiendo una guía y me trabé en el paso [número]. Esto es lo que veo: [lo que ves]. Ayúdame a resolverlo sin saltarte pasos.</pre></div>
@@ -76,13 +77,27 @@ One `<section>` per step. `data-num` is the number shown in the menu; only secti
 </section>
 ```
 
-- One `.see` per step, informative only: it says what the reader should see; the template adds the **Done** button after it.
+- One `.see` per step, informative only: it says what the reader should see; the template adds the **Done** button at the end of the step.
+- Order inside a step: actions (`ol.steps`) → `.see` → optional check question → `details.fix`.
 - One prompt or command per `.cmd`; a command uses `<div class="k">Comando</div>`.
 - Physical steps use the same block; the photo comes from the author.
 
 ## Optional pieces
 
-**Check question** (at most one per step, only where something must be understood; never blocks). Single choice:
+**Step 0 · Before the session** (when readers need accounts, programs or materials ready beforehand). It is a normal numbered step and counts for progress:
+
+```html
+<section class="part" id="p0" data-num="0" data-toc="Antes del taller">
+  <div class="wrap flow">
+    <div class="part-hd"><span class="pnum">Paso 0</span><span class="ptime">en casa</span></div>
+    <h2>Antes del taller</h2>
+    <ol class="steps"><li><span class="stitle">[Create your account / Install …]</span><p>[One line.]</p></li></ol>
+    <div class="see"><div class="ck">✓ Debes ver</div><p>[What is ready.]</p></div>
+  </div>
+</section>
+```
+
+**Check question** (at most one per step, only where something must be understood; never blocks; after `.see`). Single choice:
 
 ```html
 <div class="quiz" data-answer="b">
@@ -127,6 +142,7 @@ Internal links (`href="#p5"`) must point to an existing id; the build checks it.
     <h2>Retos para casa</h2>
     <div class="cols two">
       <div class="card"><div class="k">Reto A</div><h3>[Goal]</h3><p>[One sentence.]</p>
+        <!-- a .cmd with the starting prompt only when the reader uses an AI agent -->
         <div class="cmd"><div class="k">Prompt</div><pre>[Starting prompt]</pre></div>
         <div class="see"><div class="ck">✓ Debes ver</div><p>[Concrete result.]</p></div></div>
     </div>
@@ -146,7 +162,7 @@ Internal links (`href="#p5"`) must point to an existing id; the build checks it.
 
 ## Writing rules
 
-- Every visible sentence fits in one sentence; if it does not, split it into another item.
+- Every visible item (a paragraph, a list item, a caption) is a single sentence; if it needs more, split it into another item.
 - Describe the audience by what they want to achieve, kindly.
 - `[brackets]` mark what the reader fills in.
 - No long paragraphs; the build warns about any paragraph over 400 characters.

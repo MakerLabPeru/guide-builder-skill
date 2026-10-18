@@ -2,9 +2,9 @@
 
 The built guide is one self-contained HTML file: screenshots are embedded, nothing else to upload. Ask the author before publishing anything.
 
-## Claude (Claude Code, Claude apps)
+## Claude, when the Artifact tool is available
 
-Publish `<name>.artifact.html` with the Artifact tool. Tell the author the artifact is private until they share it from **Share**. To update, publish again to the same artifact so the link stays the same.
+Publish `<name>.artifact.html` with the Artifact tool. If you are Claude but have no Artifact tool, use Vercel below. Tell the author the artifact is private until they share it from **Share**. To update, publish again to the same artifact so the link stays the same.
 
 ## Any other agent (Codex, OpenCode, …): Vercel
 
