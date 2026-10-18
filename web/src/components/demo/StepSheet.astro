@@ -1,0 +1,37 @@
+---
+import type { Copy } from '../../i18n/types';
+import StepList from './StepList.astro';
+
+interface Props {
+  demo: Copy['demo'];
+}
+
+const { demo } = Astro.props;
+---
+
+<div data-sheet data-open="false" hidden class="group absolute inset-0 z-20">
+  <div
+    data-sheet-close
+    class="absolute inset-0 bg-[rgba(20,17,18,.45)] opacity-0 transition-opacity duration-300 group-data-[open=true]:opacity-100"
+  ></div>
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label={demo.progress}
+    class="absolute inset-x-0 bottom-0 grid translate-y-full gap-3 rounded-t-2xl bg-paper-raised px-4 pt-2.5 pb-6 shadow-[0_-24px_48px_-24px_rgba(0,0,0,.6)] transition-transform duration-300 ease-[cubic-bezier(.2,.8,.2,1)] group-data-[open=true]:translate-y-0"
+  >
+    <span class="mx-auto h-[5px] w-10 rounded bg-[#cfc6c8]"></span>
+    <div class="flex items-center justify-between">
+      <b>{demo.guideName}</b>
+      <button
+        type="button"
+        data-sheet-close
+        aria-label={demo.close}
+        class="size-11 cursor-pointer text-lg"
+      >
+        ✕
+      </button>
+    </div>
+    <StepList steps={demo.steps} />
+  </div>
+</div>

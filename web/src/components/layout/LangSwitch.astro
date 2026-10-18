@@ -1,0 +1,28 @@
+---
+import type { Lang } from '../../i18n/types';
+
+interface Props {
+  lang: Lang;
+  label: string;
+}
+
+const { lang, label } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const LINKS: { code: Lang; href: string }[] = [
+  { code: 'es', href: `${base}/` },
+  { code: 'en', href: `${base}/en/` },
+];
+---
+
+<nav aria-label={label} class="flex overflow-hidden rounded-md border border-ink-line">
+  {LINKS.map(({ code, href }) => (
+    <a
+      href={href}
+      hreflang={code}
+      aria-current={code === lang ? 'page' : undefined}
+      class="px-3 py-2 font-mono text-xs uppercase text-ink-muted aria-[current=page]:bg-snow aria-[current=page]:text-ink"
+    >
+      {code}
+    </a>
+  ))}
+</nav>

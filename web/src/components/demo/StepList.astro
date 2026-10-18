@@ -1,0 +1,28 @@
+---
+import type { GuideStep } from '../../i18n/types';
+
+interface Props {
+  steps: GuideStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="grid gap-0.5">
+  {steps.map((step, index) => (
+    <li>
+      <button
+        type="button"
+        data-step-link={index}
+        data-state={index === 0 ? 'current' : 'todo'}
+        class="group flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-lg p-2 text-left text-[15px] text-paper-muted transition-colors duration-300 data-[state=current]:bg-active data-[state=current]:font-semibold data-[state=current]:text-terminal data-[state=done]:text-ok sm:min-h-10 sm:text-sm"
+      >
+        <span class="grid size-[22px] flex-none place-content-center rounded-full bg-badge font-mono text-[11px] font-bold text-[#8c8486] transition-colors duration-300 group-data-[state=current]:bg-brand group-data-[state=current]:text-white group-data-[state=done]:bg-ok group-data-[state=done]:text-white">
+          <span class="group-data-[state=done]:hidden">{index + 1}</span>
+          <span class="hidden group-data-[state=done]:inline">✓</span>
+        </span>
+        {step.label}
+      </button>
+    </li>
+  ))}
+</ol>

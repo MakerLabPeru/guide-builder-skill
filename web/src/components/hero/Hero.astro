@@ -1,0 +1,52 @@
+---
+import type { Copy } from '../../i18n/types';
+import { AGENTS } from '../../data/agents';
+import { SKILL_VERSION } from '../../data/version';
+import Pill from '../ui/Pill.astro';
+import Section from '../ui/Section.astro';
+import AgentDemo from './AgentDemo.astro';
+import InstallBar from './InstallBar.astro';
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+const { hero } = copy;
+---
+
+<Section
+  tone="grid"
+  spacing="custom"
+  class="flex flex-wrap items-center gap-10 pt-6 pb-16 sm:gap-14 sm:pt-14 sm:pb-24"
+>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-32 -left-56 size-[760px] bg-[radial-gradient(closest-side,rgba(225,18,27,.28),transparent)]"
+  ></div>
+  <div class="relative grid min-w-0 flex-[1_1_560px] gap-5 sm:gap-6">
+    <Pill>
+      v{SKILL_VERSION} · {hero.pill}
+    </Pill>
+    <h1 class="text-[clamp(38px,11vw,66px)] leading-[1.02] font-bold tracking-[-0.035em] whitespace-pre-line">
+      {hero.title}
+      <span class="text-brand-soft">{hero.titleAccent}</span>
+    </h1>
+    <p class="max-w-[44ch] text-[17px] text-ink-muted sm:text-[19px]">{hero.lede}</p>
+    <InstallBar label={hero.installLabel} idle={copy.copy.idle} done={copy.copy.done} />
+    <div class="flex flex-wrap items-center gap-4">
+      <a
+        href="#como"
+        class="rounded-lg border border-[#3a3333] px-4.5 py-3 text-sm font-semibold hover:border-snow"
+      >
+        {hero.cta}
+      </a>
+      <span class="font-mono text-xs text-ink-faint">
+        {AGENTS.map(({ label }) => label).join(' · ')}
+      </span>
+    </div>
+  </div>
+  <div class="relative min-w-0 flex-[1_1_420px]">
+    <AgentDemo copy={copy.agentDemo} />
+  </div>
+</Section>

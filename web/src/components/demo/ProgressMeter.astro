@@ -1,0 +1,14 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['h-2 overflow-hidden rounded bg-[#efeaea]', className]}>
+  <div
+    data-progress-fill
+    class="h-full w-0 rounded bg-progress transition-[width] duration-400"
+  ></div>
+</div>

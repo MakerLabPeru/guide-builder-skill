@@ -1,0 +1,18 @@
+---
+import { AGENTS } from '../../data/agents';
+import { AGENT_CALL_TOKEN, AGENT_LABEL_TOKEN } from '../../i18n';
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const [firstAgent] = AGENTS;
+const parts = text.split(new RegExp(`(${AGENT_CALL_TOKEN}|${AGENT_LABEL_TOKEN})`));
+---
+
+{parts.map((part) => {
+  if (part === AGENT_CALL_TOKEN) return <span data-agent-call>{firstAgent.call}</span>;
+  if (part === AGENT_LABEL_TOKEN) return <span data-agent-label>{firstAgent.label}</span>;
+  return part;
+})}

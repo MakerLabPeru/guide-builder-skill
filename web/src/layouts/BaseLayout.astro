@@ -1,0 +1,33 @@
+---
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '../styles/global.css';
+import SeoMeta from '../components/layout/SeoMeta.astro';
+import type { Lang } from '../i18n/types';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  imageAlt: string;
+}
+
+const { lang, title, description, imageAlt } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <SeoMeta lang={lang} title={title} description={description} imageAlt={imageAlt} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

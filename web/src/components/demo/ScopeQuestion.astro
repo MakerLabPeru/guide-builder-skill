@@ -1,0 +1,33 @@
+---
+import type { ScopeExample } from '../../i18n/types';
+import { AGENTS } from '../../data/agents';
+import WindowFrame from '../ui/WindowFrame.astro';
+
+interface Props {
+  scope: ScopeExample;
+  round: string;
+}
+
+const { scope, round } = Astro.props;
+const [firstAgent] = AGENTS;
+---
+
+<WindowFrame tone="dark">
+  <span slot="bar" class="mx-auto font-mono text-xs text-ink-faint">
+    <span data-agent-bin>{firstAgent.bin}</span> · ~/
+  </span>
+  <div class="grid gap-2.5 px-4.5 py-3.5 font-mono text-[13.5px] leading-relaxed">
+    <div>
+      <span class="text-ink-muted">●</span> {round}
+    </div>
+    <div>
+      <span class="text-brand-soft">?</span>
+      <b class="ml-[1ch]">{scope.question}:</b>
+      <span class="block text-[#d8d2d3]">{scope.body}</span>
+    </div>
+    <div class="text-[#3fbf7f]">➜ {scope.recommendation}</div>
+  </div>
+  <div class="border-t border-ink-line px-4.5 py-2 font-mono text-[13px] text-ink-faint">
+    › <span class="animate-[blink_1s_steps(1)_infinite] text-snow">▍</span>
+  </div>
+</WindowFrame>

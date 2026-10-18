@@ -1,0 +1,25 @@
+# guide-builder
+
+> An open-source agent skill (MIT, by MakerLab Perú) that helps teachers, mentors and volunteers prepare a step-by-step guide to support their workshop. The agent defines the scope with the author in rounds of questions, runs every step for real, takes the screenshots, and publishes a self-paced page with copy buttons, progress, a "Done, next step" button and a phone layout. Works with Claude Code, Codex and OpenCode.
+
+Install: `npx skills add MakerLabPeru/guide-builder-skill`
+
+Call it from your agent:
+- Claude Code: `/guide-builder A guide about [topic], for [audience].`
+- Codex: `$guide-builder A guide about [topic], for [audience].`
+- OpenCode: `/guide-builder A guide about [topic], for [audience].`
+
+Update: `npx skills update guide-builder`
+
+## Docs
+
+- [Website (Spanish)](https://makerlabperu.github.io/guide-builder-skill/): what it does, an interactive sample guide and tips.
+- [Website (English)](https://makerlabperu.github.io/guide-builder-skill/en/)
+- [Repository and README](https://github.com/MakerLabPeru/guide-builder-skill)
+- [SKILL.md](https://github.com/MakerLabPeru/guide-builder-skill/blob/main/skills/guide-builder/SKILL.md): the full process the agent follows.
+- [Changelog](https://github.com/MakerLabPeru/guide-builder-skill/blob/main/CHANGELOG.md)
+
+## Optional
+
+- [Scope questions](https://github.com/MakerLabPeru/guide-builder-skill/blob/main/skills/guide-builder/references/scope-questions.md)
+- [Guide blocks](https://github.com/MakerLabPeru/guide-builder-skill/blob/main/skills/guide-builder/references/blocks.md)

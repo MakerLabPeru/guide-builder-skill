@@ -1,0 +1,27 @@
+---
+import { INSTALL_COMMAND } from '../../data/agents';
+import CopyButton from '../ui/CopyButton.astro';
+
+interface Props {
+  label: string;
+  idle: string;
+  done: string;
+}
+
+const { label, idle, done } = Astro.props;
+---
+
+<div class="grid max-w-[600px] gap-2">
+  <span class="font-mono text-[11px] font-semibold tracking-[0.12em] text-[#8c8486] uppercase">
+    {label}
+  </span>
+  <div class="flex items-stretch overflow-hidden rounded-lg bg-brand">
+    <code class="min-w-0 flex-1 px-4 py-3.5 font-mono text-[13px] leading-normal text-white sm:px-4.5 sm:py-4 sm:text-sm">
+      <span aria-hidden="true" class="opacity-60">
+        ${' '}
+      </span>
+      <span id="install-command">{INSTALL_COMMAND}</span>
+    </code>
+    <CopyButton target="#install-command" idle={idle} done={done} variant="block" />
+  </div>
+</div>

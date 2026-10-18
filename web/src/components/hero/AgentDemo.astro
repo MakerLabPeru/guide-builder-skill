@@ -1,0 +1,54 @@
+---
+import { AGENTS } from '../../data/agents';
+import type { Copy } from '../../i18n/types';
+import WindowFrame from '../ui/WindowFrame.astro';
+import AgentTabs from './AgentTabs.astro';
+import TerminalLine from './TerminalLine.astro';
+
+interface Props {
+  copy: Copy['agentDemo'];
+}
+
+const { copy } = Astro.props;
+const [firstAgent] = AGENTS;
+const answer = 'ml-[1ch] text-snow';
+---
+
+<WindowFrame tone="dark" class="shadow-[0_40px_80px_-40px_rgba(225,18,27,.35)]">
+  <AgentTabs slot="bar" />
+  <div class="px-4 pt-4 pb-3 font-mono text-[12px] leading-[1.8] sm:min-h-[300px] sm:px-5 sm:pt-4.5 sm:pb-3.5 sm:text-[13.5px] sm:leading-[1.85]">
+    <TerminalLine delay={0.2} tone="muted">
+      <span data-agent-bin>{firstAgent.bin}</span> · {copy.folder}
+    </TerminalLine>
+    <TerminalLine delay={0.6}>
+      <div class="my-2 rounded-md bg-[#1a1717] px-2.5 py-1.5">
+        <span class="text-brand-soft">› </span>
+        <b data-agent-call>{firstAgent.call}</b>
+        <span class="ml-[1ch] text-[#d8d2d3]">{copy.ask}</span>
+      </div>
+    </TerminalLine>
+    <TerminalLine delay={1.3} tone="muted">
+      ● {copy.round}
+    </TerminalLine>
+    <TerminalLine delay={1.8} tone="muted">
+      Q1 {copy.q1}
+      <span class={answer}>➜ {copy.a1}</span>
+    </TerminalLine>
+    <TerminalLine delay={2.4} tone="muted">
+      Q2 {copy.q2}
+      <span class={answer}>➜ {copy.a2}</span>
+    </TerminalLine>
+    <TerminalLine delay={3.1} tone="ok">
+      ✓ {copy.planApproved}
+    </TerminalLine>
+    <TerminalLine delay={3.7} tone="ok">
+      ✓ {copy.ranIt}
+    </TerminalLine>
+    <TerminalLine delay={4.3}>
+      → <span class="text-brand-soft underline">{copy.link}</span>
+    </TerminalLine>
+  </div>
+  <div class="border-t border-ink-line px-5 py-2.5 font-mono text-[13px] text-ink-faint">
+    › <span class="animate-[blink_1s_steps(1)_infinite] text-snow">▍</span>
+  </div>
+</WindowFrame>

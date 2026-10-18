@@ -1,0 +1,40 @@
+---
+import type { Copy, Lang } from '../../i18n/types';
+import { REPO_URL } from '../../data/agents';
+import AppIcon from '../icons/AppIcon.astro';
+import GitHubIcon from '../icons/GitHubIcon.astro';
+import Container from '../ui/Container.astro';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  lang: Lang;
+  copy: Copy;
+}
+
+const { lang, copy } = Astro.props;
+---
+
+<header class="relative z-10">
+  <Container class="flex items-center justify-between gap-3 py-4 sm:py-5">
+    <a href="#top" class="flex items-center gap-2.5 font-mono text-[15px] font-semibold text-snow">
+      <AppIcon />
+      guide-builder
+    </a>
+    <div class="flex items-center gap-2.5 font-mono text-xs">
+      <a href="#como" class="hidden px-1.5 py-2 text-ink-muted hover:text-snow sm:inline">
+        {copy.nav.how}
+      </a>
+      <a
+        href={REPO_URL}
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub"
+        class="inline-flex min-h-9 items-center gap-2 rounded-md border border-ink-line px-2.5 py-2 text-[#d8d2d3] hover:text-snow sm:px-3"
+      >
+        <GitHubIcon />
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <LangSwitch lang={lang} label={copy.nav.language} />
+    </div>
+  </Container>
+</header>

@@ -1,0 +1,36 @@
+---
+type Tone = 'dark' | 'light';
+
+interface Props {
+  tone?: Tone;
+  class?: string;
+}
+
+const TONES: Record<Tone, { frame: string; bar: string; dot: string }> = {
+  dark: {
+    frame: 'border-ink-line bg-ink-raised text-snow',
+    bar: 'border-ink-line',
+    dot: 'bg-ink-line',
+  },
+  light: {
+    frame: 'border-ink-line bg-paper text-terminal',
+    bar: 'border-paper-line bg-[#efeaea]',
+    dot: 'bg-[#d8d2d3]',
+  },
+};
+
+const { tone = 'dark', class: className } = Astro.props;
+const styles = TONES[tone];
+---
+
+<div class:list={['overflow-hidden rounded-xl border', styles.frame, className]}>
+  <div class:list={['flex items-center gap-2 border-b px-3 py-2.5', styles.bar]}>
+    {[1, 2, 3].map(() => (
+      <span class:list={['size-2.5 rounded-full', styles.dot]} />
+    ))}
+    <div class="ml-3 flex min-w-0 flex-1 items-center">
+      <slot name="bar" />
+    </div>
+  </div>
+  <slot />
+</div>

@@ -1,0 +1,23 @@
+---
+type Tone = 'plain' | 'muted' | 'ok';
+
+interface Props {
+  delay: number;
+  tone?: Tone;
+}
+
+const TONES: Record<Tone, string> = {
+  plain: 'text-snow',
+  muted: 'text-ink-muted',
+  ok: 'text-[#3fbf7f]',
+};
+
+const { delay, tone = 'plain' } = Astro.props;
+---
+
+<div
+  class:list={['animate-[line-in_.35s_ease_both]', TONES[tone]]}
+  style={`animation-delay: ${delay}s`}
+>
+  <slot />
+</div>

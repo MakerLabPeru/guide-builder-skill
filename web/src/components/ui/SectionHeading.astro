@@ -1,0 +1,17 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { eyebrow, title, subtitle } = Astro.props;
+---
+
+<header class="grid justify-items-center gap-3 text-center">
+  <Eyebrow>{eyebrow}</Eyebrow>
+  <h2 class="text-[clamp(30px,6vw,46px)] font-bold tracking-tight text-balance">{title}</h2>
+  {subtitle && <p class="text-[17px] text-ink-muted">{subtitle}</p>}
+</header>

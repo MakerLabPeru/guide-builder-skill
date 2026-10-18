@@ -1,0 +1,32 @@
+---
+import Container from './Container.astro';
+
+type Tone = 'ink' | 'raised' | 'grid';
+type Spacing = 'default' | 'custom';
+
+interface Props {
+  id?: string;
+  tone?: Tone;
+  spacing?: Spacing;
+  class?: string;
+}
+
+const TONES: Record<Tone, string> = {
+  ink: 'bg-ink',
+  raised: 'bg-[#141112]',
+  grid: 'grid-backdrop relative overflow-hidden bg-ink',
+};
+
+const SPACINGS: Record<Spacing, string> = {
+  default: 'py-14 sm:py-24',
+  custom: '',
+};
+
+const { id, tone = 'ink', spacing = 'default', class: className } = Astro.props;
+---
+
+<section id={id} class:list={[TONES[tone], 'scroll-mt-4']}>
+  <Container class:list={[SPACINGS[spacing], className]}>
+    <slot />
+  </Container>
+</section>

@@ -1,0 +1,27 @@
+---
+import type { Copy } from '../../i18n/types';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import TipItem from './TipItem.astro';
+
+interface Props {
+  tips: Copy['tips'];
+}
+
+const { tips } = Astro.props;
+---
+
+<Section class="grid grid-cols-[minmax(0,1fr)] gap-9">
+  <SectionHeading eyebrow={tips.eyebrow} title={tips.title} />
+  <div data-accordion class="mx-auto grid w-full max-w-[760px] gap-2.5">
+    {tips.items.map((tip, index) => (
+      <TipItem tip={tip} number={index + 1} />
+    ))}
+  </div>
+</Section>
+
+<script>
+  import { setupAccordion } from '../../scripts/accordion';
+
+  document.querySelectorAll<HTMLElement>('[data-accordion]').forEach(setupAccordion);
+</script>

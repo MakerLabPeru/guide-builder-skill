@@ -1,0 +1,63 @@
+---
+import type { Copy } from '../../i18n/types';
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import WindowFrame from '../ui/WindowFrame.astro';
+import GuideSidebar from './GuideSidebar.astro';
+import MobileGuideBar from './MobileGuideBar.astro';
+import StepSheet from './StepSheet.astro';
+import GuideStep from './GuideStep.astro';
+import StepNav from './StepNav.astro';
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+const { demo } = copy;
+---
+
+<Section id="como" tone="raised" class="grid grid-cols-[minmax(0,1fr)] gap-9">
+  <SectionHeading eyebrow={demo.eyebrow} title={demo.title} subtitle={demo.subtitle} />
+  <div
+    data-guide-demo
+    data-label-next={demo.next}
+    data-label-finish={demo.finish}
+    data-label-done={demo.done}
+    data-label-continue={demo.continue}
+    data-label-hint={demo.hint}
+    data-label-complete={demo.complete}
+    class="relative"
+  >
+    <WindowFrame tone="light" class="shadow-[0_50px_100px_-50px_rgba(0,0,0,.9)]">
+      <span
+        slot="bar"
+        class="mx-auto truncate rounded-md bg-white px-4 py-1 font-mono text-xs text-paper-muted"
+      >
+        makerlabperu.github.io/guide-builder-skill
+      </span>
+      <div class="relative flex">
+        <GuideSidebar demo={demo} />
+        <StepSheet demo={demo} />
+        <div class="flex h-[min(640px,78svh)] min-w-0 flex-[999_1_560px] flex-col sm:h-auto sm:min-h-[760px] sm:gap-4.5 sm:px-[clamp(18px,4vw,40px)] sm:py-7">
+          <MobileGuideBar demo={demo} />
+          <div
+            data-steps-scroll
+            class="grid flex-1 grid-cols-[minmax(0,1fr)] content-start overflow-y-auto overscroll-contain px-4 py-5 sm:flex-none sm:overflow-visible sm:p-0"
+          >
+            {demo.steps.map((step, index) => (
+              <GuideStep step={step} index={index} copy={copy} />
+            ))}
+          </div>
+          <StepNav demo={demo} />
+        </div>
+      </div>
+    </WindowFrame>
+  </div>
+</Section>
+
+<script>
+  import { setupGuideDemo } from '../../scripts/guide-demo';
+
+  document.querySelectorAll<HTMLElement>('[data-guide-demo]').forEach(setupGuideDemo);
+</script>

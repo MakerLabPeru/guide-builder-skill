@@ -1,0 +1,23 @@
+---
+import { AGENTS } from '../../data/agents';
+---
+
+<div role="tablist" aria-label="Agent" class="flex gap-0.5">
+  {AGENTS.map((agent, index) => (
+    <button
+      type="button"
+      role="tab"
+      data-agent-tab={agent.id}
+      aria-selected={index === 0 ? 'true' : 'false'}
+      class="min-h-[30px] cursor-pointer rounded-[5px] px-2.5 font-mono text-xs font-semibold text-ink-faint aria-selected:bg-ink-line aria-selected:text-snow"
+    >
+      {agent.label}
+    </button>
+  ))}
+</div>
+
+<script>
+  import { setupAgentTabs } from '../../scripts/agent-tabs';
+
+  setupAgentTabs();
+</script>

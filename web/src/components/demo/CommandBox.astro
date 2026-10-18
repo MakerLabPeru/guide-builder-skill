@@ -1,0 +1,27 @@
+---
+import CopyButton from '../ui/CopyButton.astro';
+import AgentText from './AgentText.astro';
+
+interface Props {
+  id: string;
+  kind: string;
+  text: string;
+  idle: string;
+  done: string;
+}
+
+const { id, kind, text, idle, done } = Astro.props;
+---
+
+<div class="overflow-hidden rounded-lg bg-terminal text-snow">
+  <div class="flex items-center justify-between border-b border-[#332d2f] py-2 pr-2 pl-3 font-mono text-[11px] font-semibold tracking-widest text-ink-muted uppercase">
+    <span>{kind}</span>
+    <CopyButton target={`#${id}`} idle={idle} done={done} />
+  </div>
+  <pre
+    id={id}
+    class="m-0 px-4 py-3.5 font-mono text-sm leading-relaxed whitespace-pre-wrap"
+  ><AgentText
+      text={text}
+    /></pre>
+</div>

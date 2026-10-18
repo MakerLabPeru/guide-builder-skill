@@ -1,0 +1,49 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 16 } = Astro.props;
+const LAYER =
+  'absolute inset-0 size-full transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(.2,.8,.2,1)]';
+---
+
+<span
+  class="relative block flex-none"
+  style={`width: ${size}px; height: ${size}px`}
+  aria-hidden="true"
+>
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class:list={[
+      LAYER,
+      'group-data-[copied=true]:scale-50 group-data-[copied=true]:opacity-0 group-data-[copied=true]:blur-[2px]',
+    ]}
+  >
+    <rect x="5.5" y="5.5" width="8" height="8" rx="2"></rect>
+    <path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"></path>
+  </svg>
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class:list={[
+      LAYER,
+      'scale-50 opacity-0 blur-[2px] group-data-[copied=true]:scale-100 group-data-[copied=true]:opacity-100 group-data-[copied=true]:blur-none',
+    ]}
+  >
+    <path
+      d="M3.5 8.5 6.5 11.5 12.5 4.5"
+      pathLength="1"
+      class="transition-[stroke-dashoffset] delay-[60ms] duration-300 ease-[cubic-bezier(.2,.8,.2,1)] [stroke-dasharray:1] [stroke-dashoffset:1] group-data-[copied=true]:[stroke-dashoffset:0]"
+    ></path>
+  </svg>
+</span>

@@ -1,0 +1,22 @@
+---
+import type { Copy } from '../../i18n/types';
+import ProgressMeter from './ProgressMeter.astro';
+import StepList from './StepList.astro';
+
+interface Props {
+  demo: Copy['demo'];
+}
+
+const { demo } = Astro.props;
+---
+
+<aside class="hidden w-[250px] flex-none content-start gap-4 border-r border-paper-line bg-paper-raised px-4.5 py-6 sm:grid">
+  <div class="grid gap-2">
+    <div class="flex justify-between font-mono text-[11px] font-semibold tracking-widest text-paper-muted uppercase">
+      <span>{demo.progress}</span>
+      <span data-progress-count>0 / {demo.steps.length}</span>
+    </div>
+    <ProgressMeter />
+  </div>
+  <StepList steps={demo.steps} />
+</aside>

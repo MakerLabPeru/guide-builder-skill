@@ -1,0 +1,32 @@
+---
+import type { Copy } from '../../i18n/types';
+
+interface Props {
+  demo: Copy['demo'];
+}
+
+const { demo } = Astro.props;
+---
+
+<div class="flex flex-none flex-wrap items-center gap-2.5 border-t border-paper-line bg-paper-raised px-4 py-2.5 shadow-[0_-10px_28px_-20px_rgba(0,0,0,.45)] sm:static sm:mx-0 sm:gap-3 sm:bg-transparent sm:px-0 sm:pt-4 sm:pb-0 sm:shadow-none">
+  <span
+    data-hint
+    class="hidden flex-1 text-sm text-paper-muted data-[win=true]:order-first data-[win=true]:block data-[win=true]:basis-full data-[win=true]:text-base data-[win=true]:font-bold data-[win=true]:text-ok sm:order-none sm:block sm:basis-auto"
+  ></span>
+  <button
+    type="button"
+    data-back
+    hidden
+    aria-label={demo.back}
+    class="min-h-12 min-w-12 cursor-pointer rounded-lg border border-paper-line px-3 text-sm font-medium text-paper-muted sm:order-first sm:px-4"
+  >
+    ←<span class="hidden sm:inline"> {demo.back}</span>
+  </button>
+  <button
+    type="button"
+    data-next
+    class="min-h-12 flex-1 cursor-pointer rounded-lg bg-brand px-5 text-[15px] font-semibold text-white disabled:cursor-default disabled:bg-ok-soft disabled:text-ok sm:flex-none"
+  >
+    {demo.next}
+  </button>
+</div>

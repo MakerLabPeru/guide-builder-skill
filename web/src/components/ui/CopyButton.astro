@@ -1,0 +1,57 @@
+---
+import CopyCheckIcon from '../icons/CopyCheckIcon.astro';
+
+type Variant = 'solid' | 'block';
+
+interface Props {
+  target: string;
+  idle: string;
+  done: string;
+  variant?: Variant;
+}
+
+const VARIANTS: Record<Variant, string> = {
+  solid: 'gap-1.5 rounded-[5px] bg-brand px-2.5 py-1.5 text-xs font-semibold text-white',
+  block: 'w-14 flex-none justify-center border-l border-black/25 bg-brand-dark text-white',
+};
+const LABEL =
+  'col-start-1 row-start-1 transition-[opacity,filter] duration-150 ease-[cubic-bezier(.2,.8,.2,1)]';
+
+const { target, idle, done, variant = 'solid' } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={['group flex cursor-pointer items-center hover:brightness-110', VARIANTS[variant]]}
+  data-copy-target={target}
+  aria-label={idle}
+>
+  <CopyCheckIcon size={variant === 'block' ? 20 : 14} />
+  {variant === 'solid' && (
+    <span class="grid">
+      <span
+        class:list={[
+          LABEL,
+          'delay-150 group-data-[copied=true]:opacity-0 group-data-[copied=true]:blur-[2px] group-data-[copied=true]:delay-0',
+        ]}
+      >
+        {idle}
+      </span>
+      <span
+        aria-hidden="true"
+        class:list={[
+          LABEL,
+          'opacity-0 blur-[2px] group-data-[copied=true]:opacity-100 group-data-[copied=true]:blur-none group-data-[copied=true]:delay-150',
+        ]}
+      >
+        {done}
+      </span>
+    </span>
+  )}
+</button>
+
+<script>
+  import { setupCopyButtons } from '../../scripts/copy';
+
+  setupCopyButtons();
+</script>
