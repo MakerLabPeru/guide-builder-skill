@@ -6,7 +6,11 @@
 
 <p align="center">A step-by-step guide to support your workshop.</p>
 
-<p align="center"><a href="README.es.md">Español</a> · <a href="https://makerlabperu.github.io/guide-builder-skill/">Website</a></p>
+<p align="center"><a href="README.es.md">Español</a> · <a href="https://makerlabperu.github.io/guide-builder-skill/en/">Website</a></p>
+
+<p align="center">
+  <a href="https://makerlabperu.github.io/guide-builder-skill/en/"><img src="assets/readme/hero-en.jpg" alt="guide-builder website: a step-by-step guide to support your workshop"></a>
+</p>
 
 ---
 
@@ -38,7 +42,15 @@ Changes are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## What a guide looks like
 
-Every step has the same shape: **Where you are · Do this · Prompt or command · You should see · If it fails**, with copy buttons, a progress bar and a **Done, next step** button.
+Every step has the same shape: **Where you are · Do this · Prompt or command · You should see · If it fails**, with copy buttons, a progress bar and a **Done, next step** button. Readers go one step at a time and get confetti at the end.
+
+![A guide on a computer: step list with progress on the left, the current step on the right](assets/readme/guide-desktop-en.jpg)
+
+On phones, the step list moves to a sheet and **Done, next step** stays within thumb reach.
+
+<p align="center"><img src="assets/readme/guide-phone-en.jpg" width="600" alt="The same guide on a phone: a step with the fixed Done button, and the step sheet open"></p>
+
+Try it on the [website](https://makerlabperu.github.io/guide-builder-skill/en/#como).
 
 ## Credits
 

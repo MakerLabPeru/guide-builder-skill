@@ -8,6 +8,10 @@
 
 <p align="center"><a href="README.md">English</a> · <a href="https://makerlabperu.github.io/guide-builder-skill/">Web</a></p>
 
+<p align="center">
+  <a href="https://makerlabperu.github.io/guide-builder-skill/"><img src="assets/readme/hero-es.jpg" alt="Web de guide-builder: una guía paso a paso para acompañar tu taller"></a>
+</p>
+
 ---
 
 Un skill para tu agente de IA que te ayuda a preparar una guía paso a paso para tu taller. Tu agente define el alcance contigo, ejecuta cada paso de verdad, toma las capturas y publica una página que tu grupo sigue a su ritmo.
@@ -38,7 +42,15 @@ Los cambios están en [CHANGELOG.md](CHANGELOG.md).
 
 ## Cómo es una guía
 
-Todos los pasos tienen la misma forma: **Dónde estás · Haz esto · Prompt o comando · Debes ver · Si falla**, con botones de copiar, barra de avance y un botón **Listo, siguiente paso**.
+Todos los pasos tienen la misma forma: **Dónde estás · Haz esto · Prompt o comando · Debes ver · Si falla**, con botones de copiar, barra de avance y un botón **Listo, siguiente paso**. Se avanza un paso a la vez y al final hay confeti.
+
+![Una guía en la computadora: la lista de pasos con el avance a la izquierda y el paso actual a la derecha](assets/readme/guide-desktop-es.jpg)
+
+En el celular, la lista de pasos pasa a una hoja y **Listo, siguiente paso** queda al alcance del pulgar.
+
+<p align="center"><img src="assets/readme/guide-phone-es.jpg" width="600" alt="La misma guía en el celular: un paso con el botón Listo fijo abajo, y la hoja de pasos abierta"></p>
+
+Pruébala en la [web](https://makerlabperu.github.io/guide-builder-skill/#como).
 
 ## Créditos
 
